@@ -1,0 +1,9 @@
+<%- include('../partials/_head') %>
+<div class="container mt-5">
+  <h2>Dashboard Superadmin</h2>
+  <p>Halo, <%= user.nama %> (Role: <%= user.role %>)</p>
+  <a href="/users" class="btn btn-primary">Kelola Users</a>
+  <a href="/kendaraan" class="btn btn-success">Kelola Kendaraan</a>
+  <a href="/tarif" class="btn btn-warning">Kelola Tarif</a>
+</div>
+<%- include('../partials/_foot') %>

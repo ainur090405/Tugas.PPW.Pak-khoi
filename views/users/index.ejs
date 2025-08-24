@@ -1,0 +1,25 @@
+<%- include('../partials/_head') %>
+<div class="container mt-5">
+  <h2>Daftar Users</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th><th>Nama</th><th>Email</th><th>Role</th><th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.id_user %></td>
+        <td><%= u.nama %></td>
+        <td><%= u.email %></td>
+        <td><%= u.role %></td>
+        <td>
+          <a href="/users/delete/<%= u.id_user %>" class="btn btn-danger btn-sm">Hapus</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/_foot') %>

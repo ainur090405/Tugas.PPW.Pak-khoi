@@ -1,0 +1,29 @@
+<%- include('../partials/_head') %>
+<div class="container mt-5">
+  <h2>Edit Tarif Parkir</h2>
+
+  <form action="/tarif/update/<%= tarif.id_tarif %>" method="POST" class="card p-4">
+    <div class="mb-3">
+      <label for="type" class="form-label">Type Kendaraan</label>
+      <input type="text" class="form-control" id="type" name="type" value="<%= tarif.type %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="harga" class="form-label">Harga</label>
+      <input type="number" class="form-control" id="harga" name="harga" value="<%= tarif.harga %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="satuan_waktu" class="form-label">Satuan Waktu</label>
+      <select id="satuan_waktu" name="satuan_waktu" class="form-select" required>
+        <option value="jam" <%= tarif.satuan_waktu === 'jam' ? 'selected' : '' %>>Per Jam</option>
+        <option value="hari" <%= tarif.satuan_waktu === 'hari' ? 'selected' : '' %>>Per Hari</option>
+        <option value="bulan" <%= tarif.satuan_waktu === 'bulan' ? 'selected' : '' %>>Per Bulan</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/tarif" class="btn btn-secondary">Batal</a>
+  </form>
+</div>
+<%- include('../partials/_foot') %>

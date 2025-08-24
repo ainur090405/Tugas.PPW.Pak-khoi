@@ -1,0 +1,31 @@
+<%- include('../partials/_head') %>
+<div class="container mt-5">
+  <h2>Data Pengunjung</h2>
+    <div class="mb-3">
+    <a href="/dashboard" class="btn btn-secondary">← Kembali ke Dashboard</a>
+    <a href="/kendaraan/create" class="btn btn-success">+ Tambah Kendaraan</a>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th><th>Wajah</th><th>Pakaian</th><th>Jenis Kelamin</th><th>ID Kendaraan</th><th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% pengunjung.forEach(p => { %>
+      <tr>
+        <td><%= p.id_pengunjung %></td>
+        <td><%= p.wajah %></td>
+        <td><%= p.pakaian %></td>
+        <td><%= p.jenis_kelamin %></td>
+        <td><%= p.id_kendaraan %></td>
+        <td>
+          <a href="/pengunjung/edit/<%= p.id_pengunjung %>" class="btn btn-warning btn-sm">Edit</a>
+          <a href="/pengunjung/delete/<%= p.id_pengunjung %>" class="btn btn-danger btn-sm">Hapus</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/_foot') %>
