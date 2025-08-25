@@ -1,0 +1,17 @@
+<h2>Tambah Kendaraan (Superadmin)</h2>
+<form method="POST" action="/superadmin/kendaraan/create">
+  <input type="text" name="opol" placeholder="Plat Nomor"><br>
+  <select name="type">
+    <option value="mobil">Mobil</option>
+    <option value="motor">Motor</option>
+  </select><br>
+  <input type="text" name="warna" placeholder="Warna"><br>
+  <input type="date" name="tanggal_masuk"><br>
+  <input type="time" name="jam_masuk"><br>
+  <select name="id_tarif">
+    <% tarif.forEach(t => { %>
+      <option value="<%= t.id_tarif %>"><%= t.type %> - <%= t.harga %></option>
+    <% }) %>
+  </select><br>
+  <button type="submit">Simpan</button>
+</form>

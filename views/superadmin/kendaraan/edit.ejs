@@ -1,0 +1,21 @@
+<h2>Edit Kendaraan (Superadmin)</h2>
+<form method="POST" action="/superadmin/kendaraan/edit/<%= kendaraan.id_kendaraan %>">
+  <input type="text" name="opol" value="<%= kendaraan.opol %>"><br>
+  <select name="type">
+    <option value="mobil" <%= kendaraan.type==='mobil'?'selected':'' %>>Mobil</option>
+    <option value="motor" <%= kendaraan.type==='motor'?'selected':'' %>>Motor</option>
+  </select><br>
+  <input type="text" name="warna" value="<%= kendaraan.warna %>"><br>
+  <select name="status">
+    <option value="in" <%= kendaraan.status==='in'?'selected':'' %>>In</option>
+    <option value="out" <%= kendaraan.status==='out'?'selected':'' %>>Out</option>
+  </select><br>
+  <select name="id_tarif">
+    <% tarif.forEach(t => { %>
+      <option value="<%= t.id_tarif %>" <%= t.id_tarif===kendaraan.id_tarif?'selected':'' %>>
+        <%= t.type %> - <%= t.harga %>
+      </option>
+    <% }) %>
+  </select><br>
+  <button type="submit">Update</button>
+</form>

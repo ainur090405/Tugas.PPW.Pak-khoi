@@ -1,12 +1,23 @@
-<%- include('../partials/_head') %>
-<div class="container mt-5">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ganti Password</title>
+</head>
+<body>
   <h2>Ganti Password</h2>
-  <form method="POST" action="/users/changepassword">
-    <div class="mb-3">
-      <label>Password Baru</label>
-      <input type="password" name="newPassword" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Update Password</button>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+  <% if (success) { %>
+    <p style="color:green;"><%= success %></p>
+  <% } %>
+
+  <form action="/users/changepassword" method="POST">
+    <input type="password" name="newPassword" placeholder="Password Baru" required><br>
+    <button type="submit">Update Password</button>
   </form>
-</div>
-<%- include('../partials/_foot') %>
+
+  <p><a href="/admin">Kembali ke Dashboard</a></p>
+</body>
+</html>

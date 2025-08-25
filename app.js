@@ -9,9 +9,15 @@ var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var kendaraanRouter = require('./routes/kendaraan');
-var pengunjungRouter = require('./routes/pengunjung');
-var tarifRouter = require('./routes/tarif');
+const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
+const superadminRouter = require('./routes/superadmin');
+const adminKendaraan = require('./routes/admin/kendaraan');
+const superKendaraan = require('./routes/superadmin/kendaraan');
+const superTarif = require('./routes/superadmin/tarif');
+const superUsers = require('./routes/superadmin/users');
+const adminPengunjung = require('./routes/admin/pengunjung');
+const superPengunjung = require('./routes/superadmin/pengunjung');
 
 var app = express();
 
@@ -27,14 +33,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
 
-// konfigurasi session
+// konfigurasi session (pakai bawaan express-session)
 app.use(session({
-  secret: 'parkir',
+  secret: 'ainur',              // ganti dengan string unik
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 3600000 }   // 1 jam
 }));
 
-// supaya session bisa diakses dari semua view
+// supaya session bisa diakses dari semua view (EJS)
 app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
@@ -43,9 +50,15 @@ app.use((req, res, next) => {
 // routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/kendaraan', kendaraanRouter);
-app.use('/pengunjung', pengunjungRouter);
-app.use('/tarif', tarifRouter);
+app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
+app.use('/superadmin', superadminRouter);
+app.use('/admin/kendaraan', adminKendaraan);
+app.use('/admin/pengunjung', adminPengunjung);
+app.use('/superadmin/kendaraan', superKendaraan);
+app.use('/superadmin/tarif', superTarif);
+app.use('/superadmin/users', superUsers);
+app.use('/superadmin/pengunjung', superPengunjung);
 
 // catch 404
 app.use(function(req, res, next) {

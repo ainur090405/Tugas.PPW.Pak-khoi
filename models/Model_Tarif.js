@@ -1,32 +1,14 @@
-const db = require('../config/database');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-module.exports = {
-    getAll: async () => {
-        const [rows] = await db.promise().query("SELECT * FROM tarif");
-        return rows;
-    },
+const Tarif = sequelize.define('Tarif', {
+  id_tarif: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  type: { type: DataTypes.ENUM('mobil', 'motor') },
+  harga: { type: DataTypes.DECIMAL(10,2) },
+  satuan_waktu: { type: DataTypes.ENUM('20_menit','1_jam','per_hari','per_bulan') }
+}, {
+  tableName: 'tarif',
+  timestamps: false
+});
 
-    getById: async (id_tarif) => {
-        const [rows] = await db.promise().query("SELECT * FROM tarif WHERE id_tarif=?", [id_tarif]);
-        return rows[0];
-    },
-
-    store: async (data) => {
-        const [result] = await db.promise().query(
-            "INSERT INTO tarif (type, harga, satuan_waktu) VALUES (?, ?, ?)",
-            [data.type, data.harga, data.satuan_waktu]
-        );
-        return result.insertId;
-    },
-
-    update: async (id_tarif, data) => {
-        await db.promise().query(
-            "UPDATE tarif SET type=?, harga=?, satuan_waktu=? WHERE id_tarif=?",
-            [data.type, data.harga, data.satuan_waktu, id_tarif]
-        );
-    },
-
-    delete: async (id_tarif) => {
-        await db.promise().query("DELETE FROM tarif WHERE id_tarif=?", [id_tarif]);
-    }
-};
+module.exports = Tarif;

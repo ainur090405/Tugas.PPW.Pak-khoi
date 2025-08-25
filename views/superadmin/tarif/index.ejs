@@ -1,0 +1,23 @@
+<h2>Data Tarif (Superadmin)</h2>
+<a href="/superadmin/tarif/create">Tambah Tarif</a>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Tipe</th>
+    <th>Harga</th>
+    <th>Satuan Waktu</th>
+    <th>Aksi</th>
+  </tr>
+  <% tarif.forEach(t => { %>
+    <tr>
+      <td><%= t.id_tarif %></td>
+      <td><%= t.type %></td>
+      <td><%= t.harga %></td>
+      <td><%= t.satuan_waktu %></td>
+      <td>
+        <a href="/superadmin/tarif/edit/<%= t.id_tarif %>">Edit</a> |
+        <a href="/superadmin/tarif/delete/<%= t.id_tarif %>">Hapus</a>
+      </td>
+    </tr>
+  <% }) %>
+</table>

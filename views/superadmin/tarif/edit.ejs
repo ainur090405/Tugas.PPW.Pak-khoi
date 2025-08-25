@@ -1,0 +1,15 @@
+<h2>Edit Tarif</h2>
+<form method="POST" action="/superadmin/tarif/edit/<%= tarif.id_tarif %>">
+  <select name="type">
+    <option value="mobil" <%= tarif.type==='mobil'?'selected':'' %>>Mobil</option>
+    <option value="motor" <%= tarif.type==='motor'?'selected':'' %>>Motor</option>
+  </select><br>
+  <input type="number" step="0.01" name="harga" value="<%= tarif.harga %>"><br>
+  <select name="satuan_waktu">
+    <option value="20_menit" <%= tarif.satuan_waktu==='20_menit'?'selected':'' %>>20 Menit</option>
+    <option value="1_jam" <%= tarif.satuan_waktu==='1_jam'?'selected':'' %>>1 Jam</option>
+    <option value="per_hari" <%= tarif.satuan_waktu==='per_hari'?'selected':'' %>>Per Hari</option>
+    <option value="per_bulan" <%= tarif.satuan_waktu==='per_bulan'?'selected':'' %>>Per Bulan</option>
+  </select><br>
+  <button type="submit">Update</button>
+</form>

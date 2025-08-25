@@ -1,0 +1,25 @@
+<h2>Data Pengunjung (Admin)</h2>
+<a href="/admin/pengunjung/create">Tambah Pengunjung</a>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Wajah</th>
+    <th>Pakaian</th>
+    <th>Jenis Kelamin</th>
+    <th>Kendaraan</th>
+    <th>Aksi</th>
+  </tr>
+  <% pengunjung.forEach(p => { %>
+    <tr>
+      <td><%= p.id_pengunjung %></td>
+      <td><%= p.wajah %></td>
+      <td><%= p.pakaian %></td>
+      <td><%= p.jenis_kelamin %></td>
+      <td><%= p.Kendaraan ? p.Kendaraan.opol : '-' %></td>
+      <td>
+        <a href="/admin/pengunjung/edit/<%= p.id_pengunjung %>">Edit</a> |
+        <a href="/admin/pengunjung/delete/<%= p.id_pengunjung %>">Hapus</a>
+      </td>
+    </tr>
+  <% }) %>
+</table>

@@ -1,0 +1,27 @@
+<h2>Data Kendaraan (Superadmin)</h2>
+<a href="/superadmin/kendaraan/create">Tambah Kendaraan</a>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Plat</th>
+    <th>Tipe</th>
+    <th>Warna</th>
+    <th>Status</th>
+    <th>Tarif</th>
+    <th>Aksi</th>
+  </tr>
+  <% kendaraan.forEach(k => { %>
+    <tr>
+      <td><%= k.id_kendaraan %></td>
+      <td><%= k.opol %></td>
+      <td><%= k.type %></td>
+      <td><%= k.warna %></td>
+      <td><%= k.status %></td>
+      <td><%= k.Tarif ? k.Tarif.harga : '-' %></td>
+      <td>
+        <a href="/superadmin/kendaraan/edit/<%= k.id_kendaraan %>">Edit</a> |
+        <a href="/superadmin/kendaraan/delete/<%= k.id_kendaraan %>">Hapus</a>
+      </td>
+    </tr>
+  <% }) %>
+</table>

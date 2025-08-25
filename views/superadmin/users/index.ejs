@@ -1,0 +1,23 @@
+<h2>Data Users (Superadmin)</h2>
+<a href="/superadmin/users/create">Tambah User</a>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Nama</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Aksi</th>
+  </tr>
+  <% users.forEach(u => { %>
+    <tr>
+      <td><%= u.id_user %></td>
+      <td><%= u.nama %></td>
+      <td><%= u.email %></td>
+      <td><%= u.role %></td>
+      <td>
+        <a href="/superadmin/users/edit/<%= u.id_user %>">Edit</a> |
+        <a href="/superadmin/users/delete/<%= u.id_user %>">Hapus</a>
+      </td>
+    </tr>
+  <% }) %>
+</table>
