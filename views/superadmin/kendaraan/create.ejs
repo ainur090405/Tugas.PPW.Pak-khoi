@@ -1,17 +1,78 @@
-<h2>Tambah Kendaraan (Superadmin)</h2>
-<form method="POST" action="/superadmin/kendaraan/create">
-  <input type="text" name="opol" placeholder="Plat Nomor"><br>
-  <select name="type">
-    <option value="mobil">Mobil</option>
-    <option value="motor">Motor</option>
-  </select><br>
-  <input type="text" name="warna" placeholder="Warna"><br>
-  <input type="date" name="tanggal_masuk"><br>
-  <input type="time" name="jam_masuk"><br>
-  <select name="id_tarif">
-    <% tarif.forEach(t => { %>
-      <option value="<%= t.id_tarif %>"><%= t.type %> - <%= t.harga %></option>
-    <% }) %>
-  </select><br>
-  <button type="submit">Simpan</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Kendaraan (Superadmin)</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-header bg-dark text-white">
+        <h2 class="mb-0">Edit Kendaraan (Superadmin)</h2>
+      </div>
+      <div class="card-body">
+
+        <form method="POST" action="/superadmin/kendaraan/edit/<%= kendaraan.id_kendaraan %>">
+
+          <!-- Nomor Polisi -->
+          <div class="mb-3">
+            <label class="form-label">Nomor Polisi</label>
+            <input type="text" class="form-control" name="opol" value="<%= kendaraan.opol %>" required>
+          </div>
+
+          <!-- Tipe Kendaraan -->
+          <div class="mb-3">
+            <label class="form-label">Tipe Kendaraan</label>
+            <select name="type" class="form-select" required>
+              <option value="mobil" <%= kendaraan.type==='mobil'?'selected':'' %>>Mobil</option>
+              <option value="motor" <%= kendaraan.type==='motor'?'selected':'' %>>Motor</option>
+            </select>
+          </div>
+
+          <!-- Warna -->
+          <div class="mb-3">
+            <label class="form-label">Warna</label>
+            <input type="text" class="form-control" name="warna" value="<%= kendaraan.warna %>" required>
+          </div>
+
+          <!-- Status -->
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select" required>
+              <option value="in" <%= kendaraan.status==='in'?'selected':'' %>>In</option>
+              <option value="out" <%= kendaraan.status==='out'?'selected':'' %>>Out</option>
+            </select>
+          </div>
+
+          <!-- Tarif -->
+          <div class="mb-3">
+            <label class="form-label">Tarif</label>
+            <select name="id_tarif" class="form-select" required>
+              <% tarif.forEach(t => { %>
+                <option value="<%= t.id_tarif %>" <%= t.id_tarif===kendaraan.id_tarif?'selected':'' %>>
+                  <%= t.type %> - Rp <%= t.harga %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <!-- Tombol -->
+          <div class="d-flex justify-content-between">
+            <a href="/superadmin/kendaraan" class="btn btn-secondary">Kembali</a>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

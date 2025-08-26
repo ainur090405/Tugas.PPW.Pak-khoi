@@ -1,23 +1,56 @@
-<h2>Data Tarif (Superadmin)</h2>
-<a href="/superadmin/tarif/create">Tambah Tarif</a>
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Tipe</th>
-    <th>Harga</th>
-    <th>Satuan Waktu</th>
-    <th>Aksi</th>
-  </tr>
-  <% tarif.forEach(t => { %>
-    <tr>
-      <td><%= t.id_tarif %></td>
-      <td><%= t.type %></td>
-      <td><%= t.harga %></td>
-      <td><%= t.satuan_waktu %></td>
-      <td>
-        <a href="/superadmin/tarif/edit/<%= t.id_tarif %>">Edit</a> |
-        <a href="/superadmin/tarif/delete/<%= t.id_tarif %>">Hapus</a>
-      </td>
-    </tr>
-  <% }) %>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Tarif (Superadmin)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="mb-0">Data Tarif (Superadmin)</h2>
+      <div>
+        <a href="/superadmin" class="btn btn-secondary me-2">⬅ Kembali</a>
+        <a href="/superadmin/tarif/create" class="btn btn-primary">+ Tambah Tarif</a>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-striped shadow-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Tipe</th>
+          <th>Harga</th>
+          <th>Satuan Waktu</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (tarif.length > 0) { %>
+          <% tarif.forEach(t => { %>
+            <tr>
+              <td><%= t.id_tarif %></td>
+              <td><%= t.type %></td>
+              <td>Rp <%= t.harga.toLocaleString() %></td>
+              <td><%= t.satuan_waktu %></td>
+              <td>
+                <a href="/superadmin/tarif/edit/<%= t.id_tarif %>" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/superadmin/tarif/delete/<%= t.id_tarif %>" 
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="5" class="text-center text-muted">Belum ada data tarif</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

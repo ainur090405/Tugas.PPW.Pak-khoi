@@ -1,25 +1,63 @@
-<h2>Data Pengunjung (Admin)</h2>
-<a href="/admin/pengunjung/create">Tambah Pengunjung</a>
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Wajah</th>
-    <th>Pakaian</th>
-    <th>Jenis Kelamin</th>
-    <th>Kendaraan</th>
-    <th>Aksi</th>
-  </tr>
-  <% pengunjung.forEach(p => { %>
-    <tr>
-      <td><%= p.id_pengunjung %></td>
-      <td><%= p.wajah %></td>
-      <td><%= p.pakaian %></td>
-      <td><%= p.jenis_kelamin %></td>
-      <td><%= p.Kendaraan ? p.Kendaraan.opol : '-' %></td>
-      <td>
-        <a href="/admin/pengunjung/edit/<%= p.id_pengunjung %>">Edit</a> |
-        <a href="/admin/pengunjung/delete/<%= p.id_pengunjung %>">Hapus</a>
-      </td>
-    </tr>
-  <% }) %>
-</table>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Pengunjung (Admin)</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="text-primary">Data Pengunjung (Admin)</h2>
+      <div>
+        <a href="/admin" class="btn btn-secondary me-2">⬅ Kembali</a>
+      <a href="/superadmin/pengunjung/create" class="btn btn-success">+ Tambah Pengunjung</a>
+      </div>
+    </div>
+
+    <div class="card shadow border-0">
+      <div class="card-body">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Wajah</th>
+              <th>Pakaian</th>
+              <th>Jenis Kelamin</th>
+              <th>Kendaraan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% pengunjung.forEach(p => { %>
+              <tr>
+                <td><%= p.id_pengunjung %></td>
+                <td><%= p.wajah %></td>
+                <td><%= p.pakaian %></td>
+                <td>
+                  <% if (p.jenis_kelamin === 'Laki-laki') { %>
+                    <span class="badge bg-primary">Laki-laki</span>
+                  <% } else { %>
+                    <span class="badge text-white" style="background-color:#e83e8c;">Perempuan</span>
+                  <% } %>
+                </td>
+                <td><%= p.Kendaraan ? p.Kendaraan.opol : '-' %></td>
+                <td>
+                  <a href="/admin/pengunjung/edit/<%= p.id_pengunjung %>" class="btn btn-sm btn-warning">Edit</a>
+                  <a href="/admin/pengunjung/delete/<%= p.id_pengunjung %>" 
+                     class="btn btn-sm btn-danger"
+                     onclick="return confirm('Yakin hapus data ini?')">Hapus</a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
