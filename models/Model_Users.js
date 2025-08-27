@@ -29,6 +29,9 @@ const User = sequelize.define('User', {
   tableName: 'users',
   timestamps: false
 });
+
+// ================== METHOD CRUD ==================
+
 // Ambil semua data user
 User.getAll = async () => {
   return await User.findAll();
@@ -37,6 +40,11 @@ User.getAll = async () => {
 // Ambil user berdasarkan ID
 User.getById = async (id) => {
   return await User.findByPk(id);
+};
+
+// Ambil user berdasarkan Email (buat login)
+User.getByEmail = async (email) => {
+  return await User.findOne({ where: { email } });
 };
 
 // Tambah user baru

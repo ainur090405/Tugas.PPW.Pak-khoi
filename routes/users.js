@@ -20,7 +20,7 @@ router.post('/changepassword', isAuthenticated, async (req, res) => {
   try {
     const hash = await bcrypt.hash(newPassword, 10);
 
-    // ganti User.update → User.updateUser
+    // Pakai method dari model
     await User.updateUser(req.session.user.id, { password: hash });
 
     res.render('users/pwd', { 
@@ -29,6 +29,7 @@ router.post('/changepassword', isAuthenticated, async (req, res) => {
       role: req.session.user.role 
     });
   } catch (err) {
+    console.error(err);
     res.render('users/pwd', { 
       error: 'Gagal mengubah password!', 
       success: null,

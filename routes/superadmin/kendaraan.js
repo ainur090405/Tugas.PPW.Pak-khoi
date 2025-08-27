@@ -20,6 +20,7 @@ router.get('/create', isAuthenticated, isSuperAdmin, async (req, res) => {
 router.post('/create', isAuthenticated, isSuperAdmin, async (req, res) => {
   const { id_tarif, opol, type, warna, tanggal_masuk, jam_masuk, status } = req.body;
   await Kendaraan.createKendaraan({
+    id_user: req.session.user.id, 
     id_tarif,
     opol,
     type,

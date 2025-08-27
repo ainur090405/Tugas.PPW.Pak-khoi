@@ -38,10 +38,12 @@
                 <td><%= k.type %></td>
                 <td><%= k.warna %></td>
                 <td>
-                  <% if (k.status === 'Tersedia') { %>
-                    <span class="badge bg-success"><%= k.status %></span>
+                  <% if (k.status === 'in') { %>
+                    <span class="badge bg-primary">IN</span>
+                  <% } else if (k.status === 'out') { %>
+                    <span class="badge bg-danger">OUT</span>
                   <% } else { %>
-                    <span class="badge bg-danger"><%= k.status %></span>
+                    <span class="badge bg-secondary"><%= k.status %></span>
                   <% } %>
                 </td>
                 <td><%= k.Tarif ? k.Tarif.harga : '-' %></td>

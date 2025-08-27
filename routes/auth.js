@@ -14,9 +14,8 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // ganti findOne → pake getAll() lalu cari by email manual
-    const users = await User.getAll();
-    const user = users.find(u => u.email === email);
+    // pakai method getByEmail dari model
+    const user = await User.getByEmail(email);
 
     if (!user) {
       req.flash('error', 'User tidak ditemukan!');
