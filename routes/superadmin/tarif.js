@@ -5,7 +5,7 @@ const Tarif = require('../../models/Model_Tarif');
 
 // READ - List Tarif
 router.get('/', isAuthenticated, isSuperAdmin, async (req, res) => {
-  const data = await Tarif.findAll();
+  const data = await Tarif.getAll(); // pakai method dari model
   res.render('superadmin/tarif/index', { tarif: data });
 });
 
@@ -17,29 +17,26 @@ router.get('/create', isAuthenticated, isSuperAdmin, (req, res) => {
 // CREATE - Action
 router.post('/create', isAuthenticated, isSuperAdmin, async (req, res) => {
   const { type, harga, satuan_waktu } = req.body;
-  await Tarif.create({ type, harga, satuan_waktu });
+  await Tarif.createTarif({ type, harga, satuan_waktu }); // pakai method dari model
   res.redirect('/superadmin/tarif');
 });
 
 // UPDATE - Form
 router.get('/edit/:id', isAuthenticated, isSuperAdmin, async (req, res) => {
-  const data = await Tarif.findByPk(req.params.id);
+  const data = await Tarif.getById(req.params.id); // pakai method dari model
   res.render('superadmin/tarif/edit', { tarif: data });
 });
 
 // UPDATE - Action
 router.post('/edit/:id', isAuthenticated, isSuperAdmin, async (req, res) => {
   const { type, harga, satuan_waktu } = req.body;
-  await Tarif.update(
-    { type, harga, satuan_waktu },
-    { where: { id_tarif: req.params.id } }
-  );
+  await Tarif.updateTarif(req.params.id, { type, harga, satuan_waktu }); // pakai method dari model
   res.redirect('/superadmin/tarif');
 });
 
 // DELETE
 router.get('/delete/:id', isAuthenticated, isSuperAdmin, async (req, res) => {
-  await Tarif.destroy({ where: { id_tarif: req.params.id } });
+  await Tarif.deleteTarif(req.params.id); // pakai method dari model
   res.redirect('/superadmin/tarif');
 });
 

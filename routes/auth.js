@@ -6,7 +6,7 @@ const User = require('../models/Model_Users');
 // GET - Login Page
 router.get('/login', (req, res) => {
   const error = req.flash('error');
-  res.render('auth/login', { error: error || [] }); // selalu ada error
+  res.render('auth/login', { error: error || [] });
 });
 
 // POST - Login Action
@@ -14,7 +14,10 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email } });
+    // ganti findOne → pake getAll() lalu cari by email manual
+    const users = await User.getAll();
+    const user = users.find(u => u.email === email);
+
     if (!user) {
       req.flash('error', 'User tidak ditemukan!');
       return res.redirect('/auth/login');
@@ -55,7 +58,7 @@ router.post('/register', async (req, res) => {
   const { nama, email, password, role } = req.body;
   try {
     const hash = await bcrypt.hash(password, 10);
-    await User.create({ nama, email, password: hash, role });
+    await User.createUser({ nama, email, password: hash, role }); // pakai method dari model
     res.redirect('/auth/login');
   } catch (err) {
     console.error(err);

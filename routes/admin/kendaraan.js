@@ -6,20 +6,20 @@ const Tarif = require('../../models/Model_Tarif');
 
 // READ - list kendaraan
 router.get('/', isAuthenticated, isAdmin, async (req, res) => {
-  const data = await Kendaraan.findAll({ include: Tarif });
+  const data = await Kendaraan.getAll(); // pakai method dari model
   res.render('admin/kendaraan/index', { kendaraan: data });
 });
 
 // CREATE - form tambah
 router.get('/create', isAuthenticated, isAdmin, async (req, res) => {
-  const tarif = await Tarif.findAll();
+  const tarif = await Tarif.getAll(); // pakai method dari model
   res.render('admin/kendaraan/create', { tarif });
 });
 
 // CREATE - simpan
 router.post('/create', isAuthenticated, isAdmin, async (req, res) => {
   const { id_tarif, opol, type, warna, tanggal_masuk, jam_masuk } = req.body;
-  await Kendaraan.create({
+  await Kendaraan.createKendaraan({
     id_user: req.session.user.id, // kendaraan dicatat oleh admin yang login
     id_tarif,
     opol,
@@ -34,24 +34,21 @@ router.post('/create', isAuthenticated, isAdmin, async (req, res) => {
 
 // UPDATE - form edit
 router.get('/edit/:id', isAuthenticated, isAdmin, async (req, res) => {
-  const data = await Kendaraan.findByPk(req.params.id);
-  const tarif = await Tarif.findAll();
+  const data = await Kendaraan.getById(req.params.id); // pakai method dari model
+  const tarif = await Tarif.getAll();
   res.render('admin/kendaraan/edit', { kendaraan: data, tarif });
 });
 
 // UPDATE - simpan edit
 router.post('/edit/:id', isAuthenticated, isAdmin, async (req, res) => {
   const { id_tarif, opol, type, warna, status } = req.body;
-  await Kendaraan.update(
-    { id_tarif, opol, type, warna, status },
-    { where: { id_kendaraan: req.params.id } }
-  );
+  await Kendaraan.updateKendaraan(req.params.id, { id_tarif, opol, type, warna, status });
   res.redirect('/admin/kendaraan');
 });
 
 // DELETE
 router.get('/delete/:id', isAuthenticated, isAdmin, async (req, res) => {
-  await Kendaraan.destroy({ where: { id_kendaraan: req.params.id } });
+  await Kendaraan.deleteKendaraan(req.params.id);
   res.redirect('/admin/kendaraan');
 });
 
