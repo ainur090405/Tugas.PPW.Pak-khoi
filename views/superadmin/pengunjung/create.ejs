@@ -1,51 +1,56 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Pengunjung</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
   <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow-lg">
-          <div class="card-header bg-primary text-white text-center">
-            <h4>Tambah Pengunjung</h4>
+    <div class="card shadow border-0">
+      <div class="card-body">
+        <h2 class="text-center text-success mb-4">Tambah Pengunjung</h2>
+
+        <form method="POST" action="/superadmin/pengunjung/create">
+          <!-- Wajah -->
+          <div class="mb-3">
+            <label class="form-label">Wajah</label>
+            <input type="text" class="form-control" name="wajah" placeholder="Wajah" required>
           </div>
-          <div class="card-body">
-            <form method="POST" action="/superadmin/pengunjung/create">
-              <div class="mb-3">
-                <label for="wajah" class="form-label">Wajah</label>
-                <input type="text" class="form-control" id="wajah" name="wajah" placeholder="Masukkan ciri wajah" required>
-              </div>
-              <div class="mb-3">
-                <label for="pakaian" class="form-label">Pakaian</label>
-                <input type="text" class="form-control" id="pakaian" name="pakaian" placeholder="Masukkan ciri pakaian" required>
-              </div>
-              <div class="mb-3">
-                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
-                  <option value="Laki-laki">Laki-laki</option>
-                  <option value="Perempuan">Perempuan</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="id_kendaraan" class="form-label">ID Kendaraan</label>
-                <input type="number" class="form-control" id="id_kendaraan" name="id_kendaraan" placeholder="Masukkan ID Kendaraan" required>
-              </div>
-              <button type="submit" class="btn btn-success w-100">Simpan</button>
-            </form>
+
+          <!-- Pakaian -->
+          <div class="mb-3">
+            <label class="form-label">Pakaian</label>
+            <input type="text" class="form-control" name="pakaian" placeholder="Pakaian" required>
           </div>
-          <div class="card-footer text-center">
-            <a href="/superadmin/pengunjung" class="btn btn-secondary btn-sm">Kembali</a>
+
+          <!-- Jenis Kelamin -->
+          <div class="mb-3">
+            <label class="form-label">Jenis Kelamin</label>
+            <select class="form-select" name="jenis_kelamin" required>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
           </div>
-        </div>
+
+          <!-- Kendaraan -->
+          <div class="mb-3">
+            <label class="form-label">ID Kendaraan</label>
+            <input type="number" class="form-control" name="id_kendaraan" placeholder="ID Kendaraan">
+          </div>
+
+          <!-- Tombol -->
+          <div class="d-flex justify-content-between">
+            <a href="/superadmin/pengunjung" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-success">Simpan</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

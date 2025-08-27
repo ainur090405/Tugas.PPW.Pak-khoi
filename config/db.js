@@ -6,7 +6,7 @@ const sequelize = new Sequelize('parkir', 'root', '', {
 });
 
 sequelize.authenticate()
-  .then(() => console.log('✅ Database connected...'))
+  .then(() => console.log('✅ Database connected'))
   .catch(err => console.error('❌ Error: ' + err));
 
 module.exports = sequelize;

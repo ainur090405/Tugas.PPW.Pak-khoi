@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Kendaraan (Superadmin)</title>
+  <title>Edit Kendaraan</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
   <div class="container mt-5">
-    <div class="card shadow-lg">
-      <div class="card-header bg-dark text-white">
-        <h2 class="mb-0">Edit Kendaraan (Superadmin)</h2>
-      </div>
+    <div class="card shadow border-0">
       <div class="card-body">
+        <h2 class="text-center text-primary mb-4">Edit Kendaraan</h2>
 
         <form method="POST" action="/superadmin/kendaraan/edit/<%= kendaraan.id_kendaraan %>">
-
-          <!-- Nomor Polisi -->
+          <!-- Plat Nomor -->
           <div class="mb-3">
-            <label class="form-label">Nomor Polisi</label>
+            <label class="form-label">Plat Nomor</label>
             <input type="text" class="form-control" name="opol" value="<%= kendaraan.opol %>" required>
           </div>
 
-          <!-- Tipe Kendaraan -->
+          <!-- Tipe -->
           <div class="mb-3">
             <label class="form-label">Tipe Kendaraan</label>
-            <select name="type" class="form-select" required>
+            <select class="form-select" name="type" required>
               <option value="mobil" <%= kendaraan.type==='mobil'?'selected':'' %>>Mobil</option>
               <option value="motor" <%= kendaraan.type==='motor'?'selected':'' %>>Motor</option>
             </select>
@@ -42,7 +37,7 @@
           <!-- Status -->
           <div class="mb-3">
             <label class="form-label">Status</label>
-            <select name="status" class="form-select" required>
+            <select class="form-select" name="status" required>
               <option value="in" <%= kendaraan.status==='in'?'selected':'' %>>In</option>
               <option value="out" <%= kendaraan.status==='out'?'selected':'' %>>Out</option>
             </select>
@@ -51,10 +46,10 @@
           <!-- Tarif -->
           <div class="mb-3">
             <label class="form-label">Tarif</label>
-            <select name="id_tarif" class="form-select" required>
+            <select class="form-select" name="id_tarif" required>
               <% tarif.forEach(t => { %>
                 <option value="<%= t.id_tarif %>" <%= t.id_tarif===kendaraan.id_tarif?'selected':'' %>>
-                  <%= t.type %> - Rp <%= t.harga %>
+                  <%= t.type %> - <%= t.harga %>
                 </option>
               <% }) %>
             </select>
@@ -62,17 +57,15 @@
 
           <!-- Tombol -->
           <div class="d-flex justify-content-between">
-            <a href="/superadmin/kendaraan" class="btn btn-secondary">Kembali</a>
+            <a href="/superadmin/kendaraan" class="btn btn-secondary">Batal</a>
             <button type="submit" class="btn btn-primary">Update</button>
           </div>
-
         </form>
-
       </div>
     </div>
   </div>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
